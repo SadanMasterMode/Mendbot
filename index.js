@@ -62,4 +62,15 @@ client.on("messageCreate", async messageCreate => {
 		messageCreate.channel.bulkDelete(num)
 		.then(messages => {messageCreate.channel.send(`** \`${messages.size}/${num}\` messages deleted successfully** `)})
 	}
+	if (messageCreate.content.startsWith("!say-a-joke")){
+		messageCreate.channel.send("Why can't a bicycle stand on its own? It's two-tired.")
+		setTimeout(500)
+		messageCreate.channel.send("Found out I was color blind the other day. That one came right out of the orange.")
+		setTimeout(500)
+		messageCreate.channel.send("What did the grape say when it was stepped on? Nothing, it just let out a little wine.")
+		setTimeout(500)
+		messageCreate.channel.send("Why can't you play poker on the African Savanna? There's too many cheetahs.")
+		setTimeout(500)
+		messageCreate.channel.send("To the guy who invented zero: Thanks for nothing!")
+	}
 })
