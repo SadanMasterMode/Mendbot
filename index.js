@@ -72,5 +72,7 @@ client.on("messageCreate", async messageCreate => {
 		messageCreate.channel.send("Why can't you play poker on the African Savanna? There's too many cheetahs.")
 		setTimeout(500)
 		messageCreate.channel.send("To the guy who invented zero: Thanks for nothing!")
+		setTimeout(500)
+		messageCreate.channel.send("What do a tick and the Eiffel Tower have in common? They're both Paris sites.")
 	}
 })
