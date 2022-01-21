@@ -39,35 +39,6 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.channel.send("rat")
 		}
 	}
-	if (messageCreate.content === "!shutdown"){
-		if (messageCreate.author.id === "626401322542956546"){
-			messageCreate.channel.send(":warning: Shutting Down...")
-			setTimeout(() => {client.destroy();}, 2000)
-		}
-	}
-	if (messageCreate.content.startsWith("!kick")){
-		if (messageCreate.author.id === "626401322542956546"){
-			var member = messageCreate.mentions.members.first();
-
-			member.kick()
-			messageCreate.channel.send(":wave: " + member.displayName + "has been kicked")
-		}
-	}
-	if (messageCreate.content.startsWith("!ban")){
-		if (messageCreate.author.id === "626401322542956546"){
-			var member = messageCreate.mentions.members.first();
-
-			member.ban()
-			messageCreate.channel.send(":wave: " + member.displayName + "has been banned")
-		}
-	}
-	if (messageCreate.content.startsWith("!clear")){
-		num = messageCreate.content.slice(6)
-		parseInt(num)
-
-		messageCreate.channel.bulkDelete(num)
-		.then(messages => {messageCreate.channel.send(`** \`${messages.size}/${num}\` messages deleted successfully** `)})
-	}
 	if (messageCreate.content === "!joke"){
 		var rngJoke = Math.floor(Math.random() * (21)) + 1;
 		if (rngJoke === 1){
@@ -133,5 +104,56 @@ client.on("messageCreate", async messageCreate => {
 		if (rngJoke === 21){
 		messageCreate.channel.send("The past, present, and future walk into a bar. It was tense.")
 		}
+		if (rngJoke === 22){
+		messageCreate.channel.send("People make such a big deal with vegans, but I don't get it. ||I've never had beef with one||\n*made by Larimar bot*")
+		}
+		if (rngJoke === 23){
+		messageCreate.channel.send("I've been working for 24 hours straight... ||So I called it a day||\n*made by Larimar bot*")
+		}
+		if (rngJoke === 24){
+		messageCreate.channel.send("Tetris is a very good game, some might even call it a blockbuster!\n*made by Larimar bot*")
+		}
+	}
+	if (messageCreate.content.startsWith("!skycrypt")){
+		skycryptMsg1 = messageCreate.content.slice(10)
+		messageCreate.reply("https://sky.shiiyu.moe/stats/" + skycryptMsg1)
+	}
+	if (messageCreate.content.startsWith("!sc")){
+		skycryptMsg2 = messageCreate.content.slice(4)
+		messageCreate.reply("https://sky.shiiyu.moe/stats/" + skycryptMsg2)
+	}
+	if (messageCreate.content === "!help"){
+		messageCreate.reply("**Current Commands + Planned Features**\n!help - display this list\n!say - repeat any message after the !say command\n!joke - send a joke from a list\n\nPlanned Features:\n!skycrypt [ign] - Send a users skycrypt, in case you're lazy for some reason.\n!looh - Current status on the lesser orb of healing, and whether its fixed\n!healer-stats - Displays a user's stats which are relevant to the healer class (armor, weapon, pet, healer level, cata level, etc) once I learn how to access the api\nprobably more, although make a ticket if you have any suggestions, ty")
+	}
+
+	// admin only commands below
+	if (messageCreate.content === "!shutdown"){
+		if (messageCreate.author.id === "626401322542956546"){
+			messageCreate.channel.send(":warning: Shutting Down...")
+			setTimeout(() => {client.destroy();}, 2000)
+		}
+	}
+	if (messageCreate.content.startsWith("!kick")){
+		if (messageCreate.author.id === "626401322542956546"){
+			var member = messageCreate.mentions.members.first();
+
+			member.kick()
+			messageCreate.channel.send(":wave: " + member.displayName + "has been kicked")
+		}
+	}
+	if (messageCreate.content.startsWith("!ban")){
+		if (messageCreate.author.id === "626401322542956546"){
+			var member = messageCreate.mentions.members.first();
+
+			member.ban()
+			messageCreate.channel.send(":wave: " + member.displayName + "has been banned")
+		}
+	}
+	if (messageCreate.content.startsWith("!clear")){
+		num = messageCreate.content.slice(6)
+		parseInt(num)
+
+		messageCreate.channel.bulkDelete(num)
+		.then(messages => {messageCreate.channel.send(`** \`${messages.size}/${num}\` messages deleted successfully** `)})
 	}
 })
