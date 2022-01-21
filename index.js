@@ -69,21 +69,69 @@ client.on("messageCreate", async messageCreate => {
 		.then(messages => {messageCreate.channel.send(`** \`${messages.size}/${num}\` messages deleted successfully** `)})
 	}
 	if (messageCreate.content === "!joke"){
+		var rngJoke = Math.floor(Math.random() * (21)) + 1;
+		if (rngJoke === 1){
 		messageCreate.channel.send("Why can't a bicycle stand on its own? It's two-tired.")
-		setTimeout(function() {
+		}
+		if (rngJoke === 2){
 		messageCreate.channel.send("Found out I was color blind the other day. That one came right out of the orange.")
-		}, 1000);
-		setTimeout(function() {
+		}
+		if (rngJoke === 3){
 		messageCreate.channel.send("What did the grape say when it was stepped on? Nothing, it just let out a little wine.")
-		}, 2000);
-		setTimeout(function() {
+		}
+		if (rngJoke === 4){
 		messageCreate.channel.send("Why can't you play poker on the African Savanna? There's too many cheetahs.")
-		}, 3000);
-		setTimeout(function() {
+		}
+		if (rngJoke === 5){
 		messageCreate.channel.send("To the guy who invented zero: Thanks for nothing!")
-		}, 4000);
-		setTimeout(function() {
+		}
+		if (rngJoke === 6){
 		messageCreate.channel.send("What do a tick and the Eiffel Tower have in common? They're both Paris sites.")
-		}, 5000);
+		}
+		if (rngJoke === 7){
+		messageCreate.channel.send("What's more amazing than a talking dog? A spelling bee.")
+		}
+		if (rngJoke === 8){
+		messageCreate.channel.send("Once you've seen one shopping center, you've seen the mall.")
+		}
+		if (rngJoke === 9){
+		messageCreate.channel.send("I'm reading a book about anti-gravity. I can't put it down.")
+		}
+		if (rngJoke === 10){
+		messageCreate.channel.send("I'm thinking of reasons to go to Switzerland. The flag is a big plus.")
+		}
+		if (rngJoke === 11){
+		messageCreate.channel.send("Why do seagulls live by the sea? ||Cause if they lived by the bay, they'd be bagels.||")
+		}
+		if (rngJoke === 12){
+		messageCreate.channel.send("How did Darth Vader know what Luke Skywalker was getting for Christmas? ||He felt his presence.||")
+		}
+		if (rngJoke === 13){
+		messageCreate.channel.send("If the mushroom was such a fun-guy why didn't they have the party at his house? ||There wasn't much-room.||")
+		}
+		if (rngJoke === 14){
+		messageCreate.channel.send("What do you get if you drop a piano down a mineshaft? ||A flat miner.||")
+		}
+		if (rngJoke === 15){
+		messageCreate.channel.send("A horse walks into a bar. Hey, says the barman. Yes please, says the horse.")
+		}
+		if (rngJoke === 16){
+		messageCreate.channel.send("A horse walks into a bar. The bartender asked him, Why the long face?")
+		}
+		if (rngJoke === 17){
+		messageCreate.channel.send("A horse walks into a bar and the bartender says, Why the long face? ||And the horse says, I'm finally realizing that my alcoholism is driving my family apart.||")
+		}
+		if (rngJoke === 18){
+		messageCreate.channel.send("Why was the broom late for work? ||It overswept||")
+		}
+		if (rngJoke === 19){
+		messageCreate.channel.send("Which side of the chicken has more feathers? ||The outside||")
+		}
+		if (rngJoke === 20){
+		messageCreate.channel.send("What are the strongest days of the week? ||Saturday and Sunday. All the rest are weak-days.||")
+		}
+		if (rngJoke === 21){
+		messageCreate.channel.send("The past, present, and future walk into a bar. It was tense.")
+		}
 	}
 })
