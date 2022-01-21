@@ -31,7 +31,13 @@ client.on("messageCreate", async messageCreate => {
 		messageCreate.channel.send(sayCMD)
 	}
 	if (messageCreate.author.id === "314197872209821699"){
-		messageCreate.channel.send("rat")
+		var randomNum = Math.floor(Math.random() * (10));
+		if (randomNum === 4){
+			messageCreate.channel.send("rat")
+		}
+		if (randomNum === 5){
+			messageCreate.channel.send("rat")
+		}
 	}
 	if (messageCreate.content === "!shutdown"){
 		if (messageCreate.author.id === "626401322542956546"){
@@ -62,17 +68,22 @@ client.on("messageCreate", async messageCreate => {
 		messageCreate.channel.bulkDelete(num)
 		.then(messages => {messageCreate.channel.send(`** \`${messages.size}/${num}\` messages deleted successfully** `)})
 	}
-	if (messageCreate.content.startsWith("!say-a-joke")){
+	if (messageCreate.content === "!joke"){
 		messageCreate.channel.send("Why can't a bicycle stand on its own? It's two-tired.")
-		setTimeout(500)
+		setTimeout(function() {
 		messageCreate.channel.send("Found out I was color blind the other day. That one came right out of the orange.")
-		setTimeout(500)
+		}, 1000);
+		setTimeout(function() {
 		messageCreate.channel.send("What did the grape say when it was stepped on? Nothing, it just let out a little wine.")
-		setTimeout(500)
+		}, 2000);
+		setTimeout(function() {
 		messageCreate.channel.send("Why can't you play poker on the African Savanna? There's too many cheetahs.")
-		setTimeout(500)
+		}, 3000);
+		setTimeout(function() {
 		messageCreate.channel.send("To the guy who invented zero: Thanks for nothing!")
-		setTimeout(500)
+		}, 4000);
+		setTimeout(function() {
 		messageCreate.channel.send("What do a tick and the Eiffel Tower have in common? They're both Paris sites.")
+		}, 5000);
 	}
 })
