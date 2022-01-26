@@ -114,7 +114,7 @@ client.on("messageCreate", async messageCreate => {
 		messageCreate.channel.send("Tetris is a very good game, some might even call it a blockbuster!\n*made by Larimar bot*")
 		}
 		if (rngJoke === 25){
-		messageCreate.channel.send("How about adding a farmer NPC to the game? ||"I can't imagine all the CORNY jokes it'll add!||"
+		messageCreate.channel.send("How about adding a farmer NPC to the game? ||I can't imagine all the CORNY jokes it'll add!||"
 		}
 	}
 	if (messageCreate.content.startsWith("!skycrypt")){
