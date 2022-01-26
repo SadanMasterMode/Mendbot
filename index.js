@@ -40,7 +40,7 @@ client.on("messageCreate", async messageCreate => {
 		}
 	}
 	if (messageCreate.content === "!joke"){
-		var rngJoke = Math.floor(Math.random() * (21)) + 1;
+		var rngJoke = Math.floor(Math.random() * (22)) + 1;
 		if (rngJoke === 1){
 		messageCreate.channel.send("Why can't a bicycle stand on its own? It's two-tired.")
 		}
@@ -112,6 +112,9 @@ client.on("messageCreate", async messageCreate => {
 		}
 		if (rngJoke === 24){
 		messageCreate.channel.send("Tetris is a very good game, some might even call it a blockbuster!\n*made by Larimar bot*")
+		}
+		if (rngJoke === 25){
+		messageCreate.channel.send("How about adding a farmer NPC to the game? ||I can't imagine all the CORNY jokes it'll add!||"
 		}
 	}
 	if (messageCreate.content.startsWith("!skycrypt")){
