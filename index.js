@@ -1,4 +1,5 @@
 const Discord = require('discord.js')
+const { MessageEmbed } = require('discord.js');
 const client = new Discord.Client({
 	allowedMentions: {
 		parse: ['users'],
@@ -14,7 +15,6 @@ const client = new Discord.Client({
 });
 const config = require("./config.js");
 console.log(config.token)
-
 
 client.login(config.token);
 sayCMD = ""
@@ -122,8 +122,22 @@ client.on("messageCreate", async messageCreate => {
 		skycryptMsg2 = messageCreate.content.slice(4)
 		messageCreate.reply("https://sky.shiiyu.moe/stats/" + skycryptMsg2)
 	}
+	if (messageCreate.content === ("!looh")){
+		const loohEmbed = new MessageEmbed()
+			.setColor('#80aaff')
+			.setTitle('**Lesser Orb of Healing`s Status**')
+			.setAuthor("Made by Sadan")
+			.setDescription('Current Status')
+			.addFields(
+				{ name: ':exclamation: Currently: Disabled :warning: :cry:', value: 'I`m malding. Disabled since <t:1601524800:R>, or <t:1601524800>' },
+			)
+			.setTimestamp()
+			.setFooter({ text: 'Is it fixed yet? DM KevinPlayz#0001 to report changes.', iconURL: 'https://media.discordapp.net/attachments/906597529842507856/935342047576072192/Lesser_Orb_of_Healing.png' });
+		messageCreate.channel.send({ embeds: [loohEmbed] });
+	}
+
 	if (messageCreate.content === "!help"){
-		messageCreate.reply("**Current Commands + Planned Features**\n!help - display this list\n!say - repeat any message after the !say command\n!joke - send a joke from a list\n\nPlanned Features:\n!skycrypt [ign] - Send a users skycrypt, in case you're lazy for some reason.\n!looh - Current status on the lesser orb of healing, and whether its fixed\n!healer-stats - Displays a user's stats which are relevant to the healer class (armor, weapon, pet, healer level, cata level, etc) once I learn how to access the api\nprobably more, although make a ticket if you have any suggestions, ty")
+		messageCreate.reply("**Current Commands + Planned Features**\n!help - display this list\n!say - repeat any message after the !say command\n!joke - send a joke from a list\n!skycrypt [ign] - Send a users skycrypt, in case you're lazy for some reason. {!sc}\n\nPlanned Features:\n!looh - Current status on the lesser orb of healing, and whether its fixed\n!healer-stats - Displays a user's stats which are relevant to the healer class (armor, weapon, pet, healer level, cata level, etc) once I learn how to access the api\nprobably more, although make a ticket if you have any suggestions, ty")
 	}
 
 	// admin only commands below
@@ -150,10 +164,31 @@ client.on("messageCreate", async messageCreate => {
 		}
 	}
 	if (messageCreate.content.startsWith("!clear")){
-		num = messageCreate.content.slice(6)
-		parseInt(num)
+		if (messageCreate.member.roles.cache.has("906312693466685450")) {
+			num = messageCreate.content.slice(6)
 
-		messageCreate.channel.bulkDelete(num)
-		.then(messages => {messageCreate.channel.send(`** \`${messages.size}/${num}\` messages deleted successfully** `)})
+			messageCreate.channel.bulkDelete(num)
+			.then(messages => {messageCreate.channel.send(`** \`${messages.size}/${num}\` messages deleted successfully** `)})
+		} else {
+			messageCreate.reply("You are not a staff member!")
+		}
+	}
+	if (messageCreate.content.startsWith("!role-add-config")){
+		if (messageCreate.member.roles.cache.has("906312693466685450")) {
+			// below is code for when I work on a role add all command that accepts any role from the message
+			// let role = messageCreate.content.slice(13)
+			// messageCreate.reply(role)
+
+			// find the role with the name provided
+			let roleName = messageCreate.guild.roles.cache.find(role => role.name === "Member - Default");
+
+			// find all guild members that aren't bots, and add the role to each
+			messageCreate.guild.members.cache.forEach(member => member.roles.add(roleName))
+
+			// notify the author of the command that the role was successfully added to all members
+			messageCreate.channel.send(`**${messageCreate.author.username}**, role **${roleName}** was added to all members`)	
+		} else {
+			messageCreate.reply("You are not a staff member!")
+		}
 	}
 })
