@@ -1,3 +1,10 @@
+//import jquery
+//TODO
+var script = document.createElement('script'); 
+script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'; 
+document.getElementsByTagName('head')[0].appendChild(script);
+
+//import discord
 const Discord = require('discord.js')
 const { MessageEmbed } = require('discord.js');
 const client = new Discord.Client({
@@ -13,19 +20,22 @@ const client = new Discord.Client({
 		"GUILD_MESSAGE_REACTIONS"
 	],
 });
+//import config
 const config = require("./config.js");
 console.log(config.token)
 
+//client setup
 client.login(config.token);
 sayCMD = ""
-
 client.on("ready", () =>{
 	console.log("Bot started up.")
 })
 
+//process commands
 client.on("messageCreate", async messageCreate => {
 	if (messageCreate.author.bot) return;
-
+	
+	//!say command
 	if (messageCreate.content.startsWith('!say')){
 		sayCMD = messageCreate.content.slice(4)
 		messageCreate.channel.send(sayCMD)
@@ -39,6 +49,8 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.channel.send("rat")
 		}
 	}
+	
+	//jokes
 	if (messageCreate.content === "!joke"){
 		var rngJoke = Math.floor(Math.random() * (22)) + 1;
 		if (rngJoke === 1){
@@ -117,14 +129,19 @@ client.on("messageCreate", async messageCreate => {
 		messageCreate.channel.send("How about adding a farmer NPC to the game? ||I can't imagine all the CORNY jokes it'll add!||"
 		}
 	}
+		
+	//skycrypt viewer
 	if (messageCreate.content.startsWith("!skycrypt")){
 		skycryptMsg1 = messageCreate.content.slice(10)
 		messageCreate.reply("https://sky.shiiyu.moe/stats/" + skycryptMsg1)
 	}
+	//short version of !skycrypt
 	if (messageCreate.content.startsWith("!sc")){
 		skycryptMsg2 = messageCreate.content.slice(4)
 		messageCreate.reply("https://sky.shiiyu.moe/stats/" + skycryptMsg2)
 	}
+	
+	//lesser orb of healing checker
 	if (messageCreate.content === ("!looh")){
 		const loohEmbed = new MessageEmbed()
 			.setColor('#80aaff')
@@ -144,12 +161,14 @@ client.on("messageCreate", async messageCreate => {
 	}
 
 	// admin only commands below
+	//shutdown
 	if (messageCreate.content === "!shutdown"){
 		if (messageCreate.author.id === "626401322542956546"){
 			messageCreate.channel.send(":warning: Shutting Down...")
 			setTimeout(() => {client.destroy();}, 2000)
 		}
 	}
+	//kick
 	if (messageCreate.content.startsWith("!kick")){
 		if (messageCreate.author.id === "626401322542956546"){
 			var member = messageCreate.mentions.members.first();
@@ -158,6 +177,7 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.channel.send(":wave: " + member.displayName + "has been kicked")
 		}
 	}
+	//ban
 	if (messageCreate.content.startsWith("!ban")){
 		if (messageCreate.author.id === "626401322542956546"){
 			var member = messageCreate.mentions.members.first();
@@ -166,6 +186,7 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.channel.send(":wave: " + member.displayName + "has been banned")
 		}
 	}
+	//clear messages
 	if (messageCreate.content.startsWith("!clear")){
 		if (messageCreate.member.roles.cache.has("906312693466685450")) {
 			num = messageCreate.content.slice(6)
@@ -176,6 +197,7 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.reply("You are not a staff member!")
 		}
 	}
+	//assign role thingy
 	if (messageCreate.content.startsWith("!role-add-config")){
 		if (messageCreate.member.roles.cache.has("906312693466685450")) {
 			// below is code for when I work on a role add all command that accepts any role from the message
