@@ -17,7 +17,8 @@ const config = require("./config.js");
 console.log(config.token)
 
 client.login(config.token);
-sayCMD = ""
+let sayCMD = ""
+let suggestCount = 0
 
 client.on("ready", () =>{
 	console.log("Bot started up.")
@@ -40,7 +41,7 @@ client.on("messageCreate", async messageCreate => {
 		}
 	}
 	if (messageCreate.content === "!joke"){
-		var rngJoke = Math.floor(Math.random() * (22)) + 1;
+		var rngJoke = Math.floor(Math.random() * (30)) + 1;
 		if (rngJoke === 1){
 		messageCreate.channel.send("Why can't a bicycle stand on its own? It's two-tired.")
 		}
@@ -114,7 +115,23 @@ client.on("messageCreate", async messageCreate => {
 		messageCreate.channel.send("Tetris is a very good game, some might even call it a blockbuster!\n*made by Larimar bot*")
 		}
 		if (rngJoke === 25){
-		messageCreate.channel.send("How about adding a farmer NPC to the game? ||I can't imagine all the CORNY jokes it'll add!||"
+		messageCreate.channel.send("How about adding a farmer NPC to the game? ||I can't imagine all the CORNY jokes it'll add!||")
+		}
+		if (rngJoke === 26){
+		messageCreate.channel.send("Little Timmy stepped on a landmine. Where did he go next? ||Everywhere.||")
+		setTimeout(() => {messageCreate.channel.send("What did it say on his gravestone? ||Rest in pieces.||");}, 3000)
+		}
+		if (rngJoke === 27){
+		messageCreate.channel.send("6:30 is the best time on a clock, hands down.\n*made by Larimar bot*")
+		}
+		if (rngJoke === 28){
+		messageCreate.channel.send("You know what they say about cliffhangers... ||_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _||\n*made by Larimar bot*")
+		}
+		if (rngJoke === 29){
+		messageCreate.channel.send("A preposition is not a good word to end a sentence with. ||And don't start a sentence with a conjunction.||")
+		}
+		if (rngJoke === 30){
+		messageCreate.channel.send("Do you know a hospital where invisible men can't hide? ||The I.C.U||\n*made by Larimar bot*")
 		}
 	}
 	if (messageCreate.content.startsWith("!skycrypt")){
@@ -129,18 +146,30 @@ client.on("messageCreate", async messageCreate => {
 		const loohEmbed = new MessageEmbed()
 			.setColor('#80aaff')
 			.setTitle('**Lesser Orb of Healing`s Status**')
-			.setAuthor("Made by Sadan")
+			.setAuthor({ name: 'Made by Sadan', iconURL: 'https://media.discordapp.net/attachments/906597529842507856/936020635702919188/prr1ahlv11g41.jpg'})
 			.setDescription('Current Status')
+			.setThumbnail('https://media.discordapp.net/attachments/906597529842507856/935342047576072192/Lesser_Orb_of_Healing.png')
 			.addFields(
-				{ name: ':exclamation: Currently: Disabled :warning: :cry:', value: 'I`m malding. Disabled since <t:1601524800:R>, or <t:1601524800>' },
+				{ name: ':exclamation:Currently: Disabled :warning: :cry:', value: 'Im malding. Disabled since <t:1601524800:R>, or <t:1601524800>' },
 			)
 			.setTimestamp()
-			.setFooter({ text: 'Is it fixed yet? DM KevinPlayz#0001 to report changes.', iconURL: 'https://media.discordapp.net/attachments/906597529842507856/935342047576072192/Lesser_Orb_of_Healing.png' });
+			.setFooter({ text: 'Is it fixed yet? DM KevinPlayz#0001 to report changes.', iconURL: 'https://media.discordapp.net/attachments/906597529842507856/936020091261308999/Mender_Crown.png' });
 		messageCreate.channel.send({ embeds: [loohEmbed] });
 	}
+	if (messageCreate.content.startsWith("!suggest")){
+		suggestMsg = messageCreate.content.slice(8)
+		suggestCount = suggestCount + 1
+		const channel = client.channels.cache.find(channel => channel.name === "suggestions")
 
+		const suggestEmbed = new MessageEmbed()
+			.setColor('#80aaff')
+			.setTitle('**Suggestion #' + suggestCount + "**")
+			.setDescription(suggestMsg)
+			.setFooter({text: 'Created by ' + messageCreate.author.username});
+		channel.send({ embeds: [suggestEmbed] });
+	}
 	if (messageCreate.content === "!help"){
-		messageCreate.reply("**Current Commands + Planned Features**\n!help - display this list\n!say - repeat any message after the !say command\n!joke - send a joke from a list\n!skycrypt [ign] - Send a users skycrypt, in case you're lazy for some reason. {!sc}\n\nPlanned Features:\n!looh - Current status on the lesser orb of healing, and whether its fixed\n!healer-stats - Displays a user's stats which are relevant to the healer class (armor, weapon, pet, healer level, cata level, etc) once I learn how to access the api\nprobably more, although make a ticket if you have any suggestions, ty")
+		messageCreate.reply("**Current Commands + Planned Features**\n!help - display this list\n!say - repeat any message after the !say command\n!joke - send a joke from a list\n!skycrypt [ign] - Send a users skycrypt, in case you're lazy for some reason. {!sc}\n!looh - Current status on the lesser orb of healing, and whether its fixed\n\nPlanned Features:\n!healer-stats - Displays a user's stats which are relevant to the healer class (armor, weapon, pet, healer level, cata level, etc) once I learn how to access the api\nprobably more, although make a ticket if you have any suggestions, ty")
 	}
 
 	// admin only commands below
