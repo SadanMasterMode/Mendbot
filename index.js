@@ -1,3 +1,10 @@
+//import jquery
+//TODO
+var script = document.createElement('script'); 
+script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'; 
+document.getElementsByTagName('head')[0].appendChild(script);
+
+//import discord
 const Discord = require('discord.js')
 const { MessageEmbed } = require('discord.js');
 const client = new Discord.Client({
@@ -13,24 +20,32 @@ const client = new Discord.Client({
 		"GUILD_MESSAGE_REACTIONS"
 	],
 });
+//import config
 const config = require("./config.js");
 console.log(config.token)
 
+//client setup
 client.login(config.token);
+
+//vars
 let sayCMD = ""
 let suggestCount = 0
 
+//main client
 client.on("ready", () =>{
 	console.log("Bot started up.")
 })
 
+//process commands
 client.on("messageCreate", async messageCreate => {
 	if (messageCreate.author.bot) return;
-
+	
+	//!say command
 	if (messageCreate.content.startsWith('!say')){
 		sayCMD = messageCreate.content.slice(4)
 		messageCreate.channel.send(sayCMD)
 	}
+  //rr rat
 	if (messageCreate.author.id === "314197872209821699"){
 		var randomNum = Math.floor(Math.random() * (10));
 		if (randomNum === 4){
@@ -40,6 +55,8 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.channel.send("rat")
 		}
 	}
+	
+	//jokes
 	if (messageCreate.content === "!joke"){
 		var rngJoke = Math.floor(Math.random() * (30)) + 1;
 		if (rngJoke === 1){
@@ -134,14 +151,19 @@ client.on("messageCreate", async messageCreate => {
 		messageCreate.channel.send("Do you know a hospital where invisible men can't hide? ||The I.C.U||\n*made by Larimar bot*")
 		}
 	}
+		
+	//skycrypt viewer
 	if (messageCreate.content.startsWith("!skycrypt")){
 		skycryptMsg1 = messageCreate.content.slice(10)
 		messageCreate.reply("https://sky.shiiyu.moe/stats/" + skycryptMsg1)
 	}
+	//short version of !skycrypt
 	if (messageCreate.content.startsWith("!sc")){
 		skycryptMsg2 = messageCreate.content.slice(4)
 		messageCreate.reply("https://sky.shiiyu.moe/stats/" + skycryptMsg2)
 	}
+	
+	//lesser orb of healing checker
 	if (messageCreate.content === ("!looh")){
 		const loohEmbed = new MessageEmbed()
 			.setColor('#80aaff')
@@ -156,6 +178,7 @@ client.on("messageCreate", async messageCreate => {
 			.setFooter({ text: 'Is it fixed yet? DM KevinPlayz#0001 to report changes.', iconURL: 'https://media.discordapp.net/attachments/906597529842507856/936020091261308999/Mender_Crown.png' });
 		messageCreate.channel.send({ embeds: [loohEmbed] });
 	}
+  //suggest command
 	if (messageCreate.content.startsWith("!suggest")){
 		suggestMsg = messageCreate.content.slice(8)
 		suggestCount = suggestCount + 1
@@ -168,17 +191,22 @@ client.on("messageCreate", async messageCreate => {
 			.setFooter({text: 'Created by ' + messageCreate.author.username});
 		channel.send({ embeds: [suggestEmbed] });
 	}
+  
+  //help command
 	if (messageCreate.content === "!help"){
 		messageCreate.reply("**Current Commands + Planned Features**\n!help - display this list\n!say - repeat any message after the !say command\n!joke - send a joke from a list\n!skycrypt [ign] - Send a users skycrypt, in case you're lazy for some reason. {!sc}\n!looh - Current status on the lesser orb of healing, and whether its fixed\n\nPlanned Features:\n!healer-stats - Displays a user's stats which are relevant to the healer class (armor, weapon, pet, healer level, cata level, etc) once I learn how to access the api\nprobably more, although make a ticket if you have any suggestions, ty")
 	}
 
 	// admin only commands below
+  
+	//shutdown
 	if (messageCreate.content === "!shutdown"){
 		if (messageCreate.author.id === "626401322542956546"){
 			messageCreate.channel.send(":warning: Shutting Down...")
 			setTimeout(() => {client.destroy();}, 2000)
 		}
 	}
+	//kick
 	if (messageCreate.content.startsWith("!kick")){
 		if (messageCreate.author.id === "626401322542956546"){
 			var member = messageCreate.mentions.members.first();
@@ -187,6 +215,7 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.channel.send(":wave: " + member.displayName + "has been kicked")
 		}
 	}
+	//ban
 	if (messageCreate.content.startsWith("!ban")){
 		if (messageCreate.author.id === "626401322542956546"){
 			var member = messageCreate.mentions.members.first();
@@ -195,6 +224,7 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.channel.send(":wave: " + member.displayName + "has been banned")
 		}
 	}
+	//clear messages
 	if (messageCreate.content.startsWith("!clear")){
 		if (messageCreate.member.roles.cache.has("906312693466685450")) {
 			num = messageCreate.content.slice(6)
@@ -205,6 +235,7 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.reply("You are not a staff member!")
 		}
 	}
+	//assign role thingy
 	if (messageCreate.content.startsWith("!role-add-config")){
 		if (messageCreate.member.roles.cache.has("906312693466685450")) {
 			// below is code for when I work on a role add all command that accepts any role from the message
