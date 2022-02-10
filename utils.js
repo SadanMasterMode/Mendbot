@@ -1,12 +1,14 @@
 //import Discord messageEmbed
 const { MessageEmbed } = require('discord.js');
 
-//embed method
-function newEmbed(title, fields, footer){
+//full embed method
+function fullEmbed(color, title, author, description, thumbnail, fields, footer){
   var embed = {
-	  color: 0x0099ff,
+	  color: color,
 	  title: title,
-	  description: 'Some description here',
+    author : author,
+	  description: description,
+    thumbnail: thumbnail,
 	  fields: fields,
 	  timestamp: new Date(),
 	  footer: {
@@ -16,3 +18,18 @@ function newEmbed(title, fields, footer){
   };
   return embed;
 }
+
+//stripped embed
+function smallEmbed(color, title, author, description, footer){
+  var embed = {
+	  color: 0x0099ff,
+	  title: title,
+	  description: description,
+	  footer: {
+		  text: footer,
+	  },
+  };
+  return embed;
+}
+
+export { fullEmbed, smallEmbed }
