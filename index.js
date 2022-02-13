@@ -3,7 +3,7 @@
 var script = document.createElement('script');
 script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
-import { fullEmbed, smallEmbed } from './utls.js';
+import { fullEmbed, smallEmbed } from './utils.js';
 
 //import discord
 const Discord = require('discord.js')
