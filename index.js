@@ -1,8 +1,9 @@
-//import jquery
+//import jquery and utils
 //TODO
-var script = document.createElement('script'); 
-script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'; 
+var script = document.createElement('script');
+script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
+import { fullEmbed, smallEmbed } from './utils.js';
 
 //import discord
 const Discord = require('discord.js')
@@ -39,7 +40,7 @@ client.on("ready", () =>{
 //process commands
 client.on("messageCreate", async messageCreate => {
 	if (messageCreate.author.bot) return;
-	
+
 	//!say command
 	if (messageCreate.content.startsWith('!say')){
 		sayCMD = messageCreate.content.slice(4)
@@ -55,7 +56,7 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.channel.send("rat")
 		}
 	}
-	
+
 	//jokes
 	if (messageCreate.content === "!joke"){
 		var rngJoke = Math.floor(Math.random() * (30)) + 1;
@@ -151,7 +152,7 @@ client.on("messageCreate", async messageCreate => {
 		messageCreate.channel.send("Do you know a hospital where invisible men can't hide? ||The I.C.U||\n*made by Larimar bot*")
 		}
 	}
-		
+
 	//skycrypt viewer
 	if (messageCreate.content.startsWith("!skycrypt")){
 		skycryptMsg1 = messageCreate.content.slice(10)
@@ -162,20 +163,13 @@ client.on("messageCreate", async messageCreate => {
 		skycryptMsg2 = messageCreate.content.slice(4)
 		messageCreate.reply("https://sky.shiiyu.moe/stats/" + skycryptMsg2)
 	}
-	
+
 	//lesser orb of healing checker
 	if (messageCreate.content === ("!looh")){
-		const loohEmbed = new MessageEmbed()
-			.setColor('#80aaff')
-			.setTitle('**Lesser Orb of Healing`s Status**')
-			.setAuthor({ name: 'Made by Sadan', iconURL: 'https://media.discordapp.net/attachments/906597529842507856/936020635702919188/prr1ahlv11g41.jpg'})
-			.setDescription('Current Status')
-			.setThumbnail('https://media.discordapp.net/attachments/906597529842507856/935342047576072192/Lesser_Orb_of_Healing.png')
-			.addFields(
-				{ name: ':exclamation:Currently: Disabled :warning: :cry:', value: 'Im malding. Disabled since <t:1601524800:R>, or <t:1601524800>' },
-			)
-			.setTimestamp()
-			.setFooter({ text: 'Is it fixed yet? DM KevinPlayz#0001 to report changes.', iconURL: 'https://media.discordapp.net/attachments/906597529842507856/936020091261308999/Mender_Crown.png' });
+		const loohEmbed = fullEmbed('#80aaff', '**Lesser Orb of Healing`s Status**', { name: 'Made by Sadan', iconURL: 'https://media.discordapp.net/attachments/906597529842507856/936020635702919188/prr1ahlv11g41.jpg'}
+		  'Current Status', 'https://media.discordapp.net/attachments/906597529842507856/935342047576072192/Lesser_Orb_of_Healing.png'
+	    { name: ':exclamation:Currently: Disabled :warning: :cry:', value: 'Im malding. Disabled since <t:1601524800:R>, or <t:1601524800>' }
+		  { text: 'Is it fixed yet? DM KevinPlayz#0001 to report changes.', iconURL: 'https://media.discordapp.net/attachments/906597529842507856/936020091261308999/Mender_Crown.png' });
 		messageCreate.channel.send({ embeds: [loohEmbed] });
 	}
   //suggest command
@@ -184,21 +178,18 @@ client.on("messageCreate", async messageCreate => {
 		suggestCount = suggestCount + 1
 		const channel = client.channels.cache.find(channel => channel.name === "suggestions")
 
-		const suggestEmbed = new MessageEmbed()
-			.setColor('#80aaff')
-			.setTitle('**Suggestion #' + suggestCount + "**")
-			.setDescription(suggestMsg)
-			.setFooter({text: 'Created by ' + messageCreate.author.username});
+		const suggestEmbed = smallEmbed('#80aaff', '**Suggestion #' + suggestCount + "**",
+		suggestMsg, {text: 'Created by ' + messageCreate.author.username})
 		channel.send({ embeds: [suggestEmbed] });
 	}
-  
+
   //help command
 	if (messageCreate.content === "!help"){
 		messageCreate.reply("**Current Commands + Planned Features**\n!help - display this list\n!say - repeat any message after the !say command\n!joke - send a joke from a list\n!skycrypt [ign] - Send a users skycrypt, in case you're lazy for some reason. {!sc}\n!looh - Current status on the lesser orb of healing, and whether its fixed\n\nPlanned Features:\n!healer-stats - Displays a user's stats which are relevant to the healer class (armor, weapon, pet, healer level, cata level, etc) once I learn how to access the api\nprobably more, although make a ticket if you have any suggestions, ty")
 	}
 
 	// admin only commands below
-  
+
 	//shutdown
 	if (messageCreate.content === "!shutdown"){
 		if (messageCreate.author.id === "626401322542956546"){
@@ -249,7 +240,7 @@ client.on("messageCreate", async messageCreate => {
 			messageCreate.guild.members.cache.forEach(member => member.roles.add(roleName))
 
 			// notify the author of the command that the role was successfully added to all members
-			messageCreate.channel.send(`**${messageCreate.author.username}**, role **${roleName}** was added to all members`)	
+			messageCreate.channel.send(`**${messageCreate.author.username}**, role **${roleName}** was added to all members`)
 		} else {
 			messageCreate.reply("You are not a staff member!")
 		}
